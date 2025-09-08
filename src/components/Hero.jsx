@@ -1,17 +1,18 @@
 import { motion } from 'framer-motion';
 import { Heart, MapPin, Calendar, ChevronDown, Sparkles } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, memo, useCallback } from 'react';
+import OptimizedImage from './OptimizedImage';
 
-const Hero = () => {
+const Hero = memo(() => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Imágenes de parejas más elegantes y variadas
-  const coupleImages = [
+  // Imágenes de parejas más elegantes y variadas - optimizadas
+  const coupleImages = useMemo(() => [
     'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'
-  ];
+  ], []);
 
   // Auto-rotación de imágenes cada 6 segundos
   useEffect(() => {
@@ -24,12 +25,12 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [coupleImages.length]);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   return (
     <section id="hero" className="relative h-screen max-h-[100vh] overflow-hidden">
@@ -45,7 +46,7 @@ const Hero = () => {
         }}></div>
       </div>
 
-      {/* Carrusel de imágenes de fondo con overlay elegante */}
+      {/* Carrusel de imágenes de fondo con overlay elegante - optimizado */}
       <div className="absolute inset-0 overflow-hidden">
         {coupleImages.map((image, index) => (
           <motion.div
@@ -60,14 +61,20 @@ const Hero = () => {
               duration: 2.5, 
               ease: "easeInOut" 
             }}
-            style={{
-              backgroundImage: `url(${image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              filter: 'blur(0.2px) brightness(0.8)',
-            }}
-          />
+          >
+            <OptimizedImage
+              src={image}
+              alt={`Imagen de boda ${index + 1}`}
+              className="w-full h-full"
+              priority={index === 0}
+            />
+            <div 
+              className="absolute inset-0"
+              style={{
+                filter: 'blur(0.2px) brightness(0.8)',
+              }}
+            />
+          </motion.div>
         ))}
         {/* Overlay con gradiente de la paleta - más sutil */}
         <div className="absolute inset-0 bg-gradient-to-t from-burgundy-900/30 via-burgundy-800/10 to-wine-900/20"></div>
@@ -298,6 +305,8 @@ const Hero = () => {
 
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

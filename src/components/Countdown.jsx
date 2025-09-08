@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, memo } from 'react';
 import { Heart, Calendar, Clock, Sparkles } from 'lucide-react';
 
-const Countdown = () => {
+
+// Componente memoizado para evitar re-renders innecesarios
+const Countdown = memo(() => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -32,7 +34,7 @@ const Countdown = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const containerVariants = {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
@@ -42,9 +44,9 @@ const Countdown = () => {
         staggerChildren: 0.15,
       },
     },
-  };
+  }), []);
 
-  const itemVariants = {
+  const itemVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 30, scale: 0.9 },
     visible: {
       opacity: 1,
@@ -55,14 +57,14 @@ const Countdown = () => {
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
-  };
+  }), []);
 
-  const timeUnits = [
+  const timeUnits = useMemo(() => [
     { label: 'Días', value: timeLeft.days, color: 'from-rose to-burgundy-500' },
     { label: 'Horas', value: timeLeft.hours, color: 'from-burgundy-400 to-burgundy-600' },
     { label: 'Minutos', value: timeLeft.minutes, color: 'from-burgundy-400 to-wine-500' },
     { label: 'Segundos', value: timeLeft.seconds, color: 'from-wine-400 to-rose' },
-  ];
+  ], [timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds]);
 
   return (
     <section id="countdown" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 md:px-8 bg-gradient-to-br from-burgundy-50 via-burgundy-100 to-burgundy-200 relative overflow-hidden">
@@ -159,6 +161,8 @@ const Countdown = () => {
       </div>
     </section>
   );
-};
+});
+
+Countdown.displayName = 'Countdown';
 
 export default Countdown;

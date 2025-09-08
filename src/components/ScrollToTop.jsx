@@ -1,29 +1,32 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useCallback } from 'react';
+import useScrollOptimization from '../hooks/useScrollOptimization';
 
-const ScrollToTop = () => {
+const ScrollToTop = memo(() => {
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+  const toggleVisibility = useCallback(() => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
   }, []);
 
-  const scrollToTop = () => {
+  // Usar scroll optimizado con throttling
+  useScrollOptimization({
+    onScroll: toggleVisibility,
+    throttleDelay: 16, // ~60fps
+    enablePassive: true
+  });
+
+  const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-  };
+  }, []);
 
   return (
     <AnimatePresence>
@@ -55,6 +58,8 @@ const ScrollToTop = () => {
       )}
     </AnimatePresence>
   );
-};
+});
+
+ScrollToTop.displayName = 'ScrollToTop';
 
 export default ScrollToTop;

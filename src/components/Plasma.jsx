@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo, useCallback } from 'react';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
-const Plasma = ({ 
+const Plasma = memo(({ 
   color = "#c4176a", 
   speed = 0.4, 
   scale = 1.2, 
@@ -13,8 +14,17 @@ const Plasma = ({
   const animationRef = useRef(null);
   const timeRef = useRef(0);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
+  
+  // Solo renderizar cuando esté en viewport
+  const [ref, isIntersecting] = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '100px'
+  });
 
   useEffect(() => {
+    // Solo inicializar cuando esté en viewport
+    if (!isIntersecting) return;
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -197,23 +207,29 @@ const Plasma = ({
         gl.deleteProgram(program);
       }
     };
-  }, [color, speed, scale, opacity, mouseInteractive]);
+  }, [color, speed, scale, opacity, mouseInteractive, isIntersecting]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        zIndex: 1,
-        transform: `scale(${scale})`,
-        transformOrigin: 'center',
-      }}
-    />
+    <div ref={ref} style={{ width: '100%', height: '100%' }}>
+      {isIntersecting && (
+        <canvas
+          ref={canvasRef}
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 1,
+            transform: `scale(${scale})`,
+            transformOrigin: 'center',
+          }}
+        />
+      )}
+    </div>
   );
-};
+});
+
+Plasma.displayName = 'Plasma';
 
 export default Plasma;
