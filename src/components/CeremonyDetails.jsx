@@ -128,7 +128,7 @@ const CeremonyDetails = () => {
           viewport={{ once: true }}
         >
           <div className="text-center mb-12">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-fraunces font-bold text-pearl-100 mb-6">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-pearl-100 mb-6 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
               <span className="bg-gradient-to-r from-pearl-100 via-rose-300 to-pearl-100 bg-clip-text text-transparent">
                 Ubicación
               </span>
@@ -153,7 +153,7 @@ const CeremonyDetails = () => {
                       <Church className="w-6 h-6 text-rose-400 mr-3" />
                       Dirección
                     </h4>
-                    <p className="text-lg font-poppins font-semibold text-pearl-200 mb-2">Parroquia San Gregorio Magno</p>
+                    <p className="text-xl sm:text-2xl font-poppins font-semibold text-pearl-200 mb-2">Parroquia San Gregorio Magno</p>
                     <p className="text-base font-poppins text-pearl-300">Calle Amistad #1267</p>
                     <p className="text-base font-poppins text-pearl-300">Col. Margarita Maza de Juárez</p>
                   </div>

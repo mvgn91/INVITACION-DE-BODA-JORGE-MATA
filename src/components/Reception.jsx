@@ -85,7 +85,7 @@ END:VCALENDAR`;
               <div className="w-24 h-px bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
               <div className="w-24 h-px bg-gradient-to-l from-transparent via-rose-300 to-transparent"></div>
             </div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-fraunces font-bold text-burgundy-800 mb-4">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-fraunces font-bold text-burgundy-800 mb-4">
               Eventos GREENOVIA
             </h3>
             <p className="text-lg md:text-xl font-poppins text-burgundy-600 max-w-3xl mx-auto leading-relaxed">
