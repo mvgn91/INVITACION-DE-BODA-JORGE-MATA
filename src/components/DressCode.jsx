@@ -240,7 +240,7 @@ const DressCode = () => {
                   }}
                 >
                   <motion.p 
-                    className="text-base sm:text-lg md:text-xl font-fraunces text-red-800 font-bold mb-2 sm:mb-3 leading-relaxed"
+                    className="text-sm sm:text-base md:text-lg font-fraunces text-red-800 font-bold mb-2 sm:mb-3 leading-relaxed px-2 sm:px-0"
                     animate={{
                       opacity: [0.9, 1, 0.9]
                     }}
@@ -251,11 +251,12 @@ const DressCode = () => {
                     }}
                   >
                     Si te presentas con alguno de los colores descritos anteriormente, 
-                    <span className="text-red-900 font-black"> NO PODRÁS ENTRAR</span> a la ceremonia.
+                    <br className="sm:hidden" />
+                    <span className="text-red-900 font-black uppercase"> NO PODRÁS ENTRAR A LA CEREMONIA.</span>
                   </motion.p>
                   
                   <motion.p 
-                    className="text-sm sm:text-base font-poppins text-red-700 font-medium"
+                    className="text-xs sm:text-sm font-poppins text-red-700 font-medium px-2 sm:px-0"
                     animate={{
                       opacity: [0.7, 1, 0.7]
                     }}
