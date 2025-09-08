@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'fraunces': ['Fraunces', 'serif'],
         'poppins': ['Poppins', 'sans-serif'],
+        'allura': ['Allura', 'cursive'],
       },
       colors: {
         // Paleta de colores elegante sin grises ni verdes

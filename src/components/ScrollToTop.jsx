@@ -33,10 +33,10 @@ const ScrollToTop = () => {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-rose to-burgundy-500 border-2 border-white/20 flex items-center justify-center text-white shadow-2xl hover:shadow-rose-500/40 transition-all duration-300 group backdrop-blur-sm"
+          className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-burgundy-600 hover:bg-burgundy-700 border-2 border-white/20 flex items-center justify-center text-white shadow-2xl hover:shadow-burgundy-500/40 transition-all duration-300 group backdrop-blur-sm"
           whileHover={{ 
             scale: 1.1,
-            boxShadow: "0 0 30px rgba(196, 23, 106, 0.6)"
+            boxShadow: "0 0 30px rgba(139, 69, 19, 0.6)"
           }}
           whileTap={{ scale: 0.95 }}
           onClick={scrollToTop}
@@ -49,7 +49,7 @@ const ScrollToTop = () => {
               ease: "easeInOut"
             }}
           >
-            <ArrowUp className="w-6 h-6 group-hover:text-rose-100 transition-colors duration-300" />
+            <ArrowUp className="w-6 h-6 text-white group-hover:text-white transition-colors duration-300" style={{ color: 'white !important' }} />
           </motion.div>
         </motion.button>
       )}

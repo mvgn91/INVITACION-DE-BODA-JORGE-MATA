@@ -82,7 +82,7 @@ const Countdown = () => {
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-fraunces font-bold text-burgundy-800 mb-6 sm:mb-8 tracking-tight relative inline-block drop-shadow-[0_0_20px_rgba(139,69,19,0.2)]">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-burgundy-800 mb-6 sm:mb-8 tracking-tight relative inline-block drop-shadow-[0_0_20px_rgba(139,69,19,0.2)]">
             <span className="relative z-10">Cuenta Regresiva</span>
             <div className="absolute -inset-2 bg-gradient-to-r from-rose/30 via-burgundy-300/30 to-rose/30 blur-lg opacity-70 animate-pulse rounded-lg"></div>
             <div className="absolute -inset-1 bg-gradient-to-r from-rose/20 via-burgundy-300/20 to-rose/20 blur-md opacity-50 rounded-md"></div>
@@ -93,7 +93,7 @@ const Countdown = () => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -116,7 +116,7 @@ const Countdown = () => {
                 {/* Número principal */}
                 <div className="relative z-10 text-center">
                   <motion.div
-                    className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-fraunces font-bold bg-gradient-to-br ${unit.color} bg-clip-text text-transparent mb-2 sm:mb-3 md:mb-4`}
+                    className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-fraunces font-bold bg-gradient-to-br ${unit.color} bg-clip-text text-transparent mb-2 sm:mb-3 md:mb-4`}
                     key={unit.value}
                     initial={{ scale: 1.3, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

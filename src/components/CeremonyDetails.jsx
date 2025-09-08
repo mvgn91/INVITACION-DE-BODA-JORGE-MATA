@@ -9,7 +9,9 @@ import {
   Camera,
   Music,
   Navigation,
-  Car
+  Car,
+  Gift,
+  ExternalLink
 } from 'lucide-react';
 
 const CeremonyDetails = () => {
@@ -65,7 +67,7 @@ const CeremonyDetails = () => {
           viewport={{ once: true }}
         >
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-fraunces font-bold text-pearl-100 mb-6 sm:mb-8 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-pearl-100 mb-6 sm:mb-8 tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
             <span className="bg-gradient-to-r from-pearl-100 via-rose-300 to-pearl-100 bg-clip-text text-transparent">
               Nuestra Ceremonia
             </span>
@@ -126,7 +128,7 @@ const CeremonyDetails = () => {
           viewport={{ once: true }}
         >
           <div className="text-center mb-12">
-            <h3 className="text-4xl md:text-5xl font-fraunces font-bold text-pearl-100 mb-6">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-fraunces font-bold text-pearl-100 mb-6">
               <span className="bg-gradient-to-r from-pearl-100 via-rose-300 to-pearl-100 bg-clip-text text-transparent">
                 Ubicación
               </span>
@@ -175,7 +177,7 @@ const CeremonyDetails = () => {
                         href="https://maps.app.goo.gl/haV7toUE5krwgR1j6"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-poppins font-semibold py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center group hover:shadow-lg hover:scale-105 active:scale-95"
+                        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-poppins font-semibold py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center group hover:shadow-lg hover:scale-105 active:scale-95"
                       >
                         <Navigation className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                         <span className="hidden xs:inline">Abrir en </span>Google Maps
@@ -184,7 +186,7 @@ const CeremonyDetails = () => {
                         href="https://www.waze.com/en/live-map/directions/parroquia-san-gregorio-magno-amistad-1268-guadalajara?place=w.168231119.1682311191.9243343"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-poppins font-semibold py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center group hover:shadow-lg hover:scale-105 active:scale-95"
+                        className="w-full bg-purple-500 hover:bg-purple-600 text-white font-poppins font-semibold py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center group hover:shadow-lg hover:scale-105 active:scale-95"
                       >
                         <Car className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                         <span className="hidden xs:inline">Abrir en </span>Waze
@@ -193,12 +195,12 @@ const CeremonyDetails = () => {
                   </div>
                 </div>
                 
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-2 hidden sm:block">
                   <div className="relative overflow-hidden rounded-2xl shadow-xl">
                     <iframe 
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d554.7714151508845!2d-103.3010881567749!3d20.708504638899733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b11b34bf70a5%3A0x310d772809651204!2sParroquia%20De%20San%20Gregorio%20Magno!5e0!3m2!1ses-419!2smx!4v1757216334071!5m2!1ses-419!2smx" 
                       width="100%" 
-                      height="400" 
+                      height="500" 
                       style={{border: 0}} 
                       allowFullScreen="" 
                       loading="lazy" 
@@ -220,17 +222,105 @@ const CeremonyDetails = () => {
           transition={{ duration: 1.2, delay: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="relative inline-block">
-            <div className="absolute -inset-4 bg-gradient-to-r from-rose/20 via-burgundy-200/20 to-rose/20 rounded-3xl blur-lg opacity-60"></div>
-            <div className="relative bg-burgundy-800/90 backdrop-blur-md px-12 py-10 rounded-3xl border border-rose/30 shadow-2xl">
+          <motion.div 
+            className="relative inline-block group"
+            whileHover={{ 
+              scale: 1.02, 
+              y: -8,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <motion.div 
+              className="absolute -inset-4 bg-gradient-to-r from-rose/20 via-burgundy-200/20 to-rose/20 rounded-3xl blur-lg opacity-60"
+              animate={{
+                opacity: [0.4, 0.8, 0.4]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            ></motion.div>
+            <div className="relative bg-burgundy-800/90 backdrop-blur-md px-12 py-10 rounded-3xl border border-rose/30 shadow-2xl overflow-hidden">
               
-              <blockquote className="text-2xl md:text-3xl font-fraunces text-pearl-100 italic font-medium max-w-4xl leading-relaxed mb-6">
-                "El amor verdadero no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección"
-              </blockquote>
+              {/* Efecto de brillo sutil */}
+              <div className="absolute inset-0 bg-gradient-to-r from-rose-500/10 to-burgundy-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
               
-              <p className="text-lg font-poppins text-pearl-200 font-medium">- Antoine de Saint-Exupéry</p>
+              {/* Partículas decorativas */}
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <motion.div
+                  className="absolute top-4 left-8 w-1 h-1 bg-rose-300 rounded-full"
+                  animate={{
+                    y: [0, -15, 0],
+                    opacity: [0.2, 0.8, 0.2],
+                    x: [0, 5, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    delay: 0
+                  }}
+                />
+                <motion.div
+                  className="absolute top-8 right-12 w-1 h-1 bg-pearl-300 rounded-full"
+                  animate={{
+                    y: [0, -12, 0],
+                    opacity: [0.3, 0.9, 0.3],
+                    x: [0, -3, 0]
+                  }}
+                  transition={{
+                    duration: 3.5,
+                    repeat: Infinity,
+                    delay: 1
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-6 left-16 w-1 h-1 bg-rose-200 rounded-full"
+                  animate={{
+                    y: [0, -10, 0],
+                    opacity: [0.1, 0.6, 0.1],
+                    x: [0, 8, 0]
+                  }}
+                  transition={{
+                    duration: 3.8,
+                    repeat: Infinity,
+                    delay: 2
+                  }}
+                />
+              </div>
+              
+              <div className="relative z-10">
+                <motion.blockquote 
+                  className="text-2xl md:text-3xl font-fraunces text-pearl-100 italic font-medium max-w-4xl leading-relaxed mb-6"
+                  animate={{
+                    opacity: [0.9, 1, 0.9]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  "El amor verdadero no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección"
+                </motion.blockquote>
+                
+                <motion.p 
+                  className="text-lg font-poppins text-pearl-200 font-medium"
+                  animate={{
+                    opacity: [0.7, 1, 0.7]
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                >
+                  - Antoine de Saint-Exupéry
+                </motion.p>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
       </div>
