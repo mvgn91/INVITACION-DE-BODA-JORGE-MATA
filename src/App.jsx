@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Countdown from './components/Countdown'
 import CeremonyDetails from './components/CeremonyDetails'
+import DressCode from './components/DressCode'
 import Reception from './components/Reception'
 import GiftRegistry from './components/GiftRegistry'
 import RSVP from './components/RSVP'
@@ -16,6 +17,7 @@ function App() {
       <Hero />
       <Countdown />
       <CeremonyDetails />
+      <DressCode />
       <Reception />
       <GiftRegistry />
       <RSVP />

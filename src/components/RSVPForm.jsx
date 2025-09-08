@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { User, Users, Phone, Check, X, Utensils, Send, Sparkles } from 'lucide-react';
+import { User, Users, Phone, Check, X, Utensils, Send, Sparkles, Shirt, AlertTriangle, UserPlus, Hash, Plus } from 'lucide-react';
 import { sendToGoogleSheets } from '../config/googleSheets';
 
 const RSVPForm = () => {
@@ -9,7 +9,8 @@ const RSVPForm = () => {
     acompanantes: 0,
     telefono: '',
     asistencia: '',
-    restricciones: ''
+    restricciones: '',
+    dressCodeAccepted: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -17,10 +18,10 @@ const RSVPForm = () => {
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
     
     // Clear error when user starts typing
@@ -45,6 +46,10 @@ const RSVPForm = () => {
     
     if (!formData.asistencia) {
       newErrors.asistencia = 'Por favor confirma tu asistencia';
+    }
+    
+    if (!formData.dressCodeAccepted) {
+      newErrors.dressCodeAccepted = 'Debes aceptar el código de vestimenta para continuar';
     }
     
     if (formData.nombre.length < 2) {
@@ -90,7 +95,8 @@ const RSVPForm = () => {
         acompanantes: 0,
         telefono: '',
         asistencia: '',
-        restricciones: ''
+        restricciones: '',
+        dressCodeAccepted: false
       });
     } catch (error) {
       console.error('Error sending RSVP:', error);
@@ -227,8 +233,10 @@ const RSVPForm = () => {
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Nombre Completo */}
               <motion.div variants={itemVariants}>
-                <label className="flex items-center gap-3 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-3">
-                  <User className="w-5 h-5 text-amber-600" />
+                <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <User className="w-6 h-6 text-white" />
+                  </div>
                   Nombre Completo *
                 </label>
                 <motion.input
@@ -259,8 +267,10 @@ const RSVPForm = () => {
 
               {/* Número de Acompañantes */}
               <motion.div variants={itemVariants}>
-                <label className="flex items-center gap-3 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-3">
-                  <Users className="w-5 h-5 text-amber-600" />
+                <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Plus className="w-6 h-6 text-white" />
+                  </div>
                   Número de Acompañantes
                 </label>
                 <motion.input
@@ -280,8 +290,10 @@ const RSVPForm = () => {
 
               {/* Teléfono */}
               <motion.div variants={itemVariants}>
-                <label className="flex items-center gap-3 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-3">
-                  <Phone className="w-5 h-5 text-amber-600" />
+                <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
                   Teléfono *
                 </label>
                 <motion.input
@@ -312,8 +324,10 @@ const RSVPForm = () => {
 
               {/* Asistencia */}
               <motion.div variants={itemVariants}>
-                <label className="flex items-center gap-3 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-6">
-                  <Check className="w-5 h-5 text-amber-600" />
+                <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-6">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
                   ¿Confirmas tu asistencia? *
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -362,8 +376,10 @@ const RSVPForm = () => {
 
               {/* Restricciones Alimentarias */}
               <motion.div variants={itemVariants}>
-                <label className="flex items-center gap-3 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-3">
-                  <Utensils className="w-5 h-5 text-amber-600" />
+                <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Utensils className="w-6 h-6 text-white" />
+                  </div>
                   Restricciones Alimentarias (opcional)
                 </label>
                 <motion.textarea
@@ -378,6 +394,72 @@ const RSVPForm = () => {
                     boxShadow: "0 0 30px rgba(245, 158, 11, 0.2)",
                   }}
                 />
+              </motion.div>
+
+              {/* Código de Vestimenta */}
+              <motion.div variants={itemVariants}>
+                <div className="bg-gradient-to-r from-red-50 to-amber-50 border-2 border-red-200 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                  <label className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-3 sm:mb-4">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                      <Shirt className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    <div className="flex-1 text-center sm:text-left">
+                      <span className="block mb-2 sm:mb-3">Código de Vestimenta *</span>
+                      <div className="text-xs sm:text-sm font-poppins text-gray-600 mb-3 sm:mb-4">
+                        <p className="mb-2">He leído y acepto el código de vestimenta que incluye:</p>
+                        <ul className="list-disc list-inside space-y-1 text-red-700 font-semibold">
+                          <li>Vestimenta de etiqueta obligatoria</li>
+                          <li>Colores prohibidos: Rojo, Blanco, Beige, Hueso, Crema</li>
+                          <li>Entrada negada si no se respeta el código</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </label>
+                  
+                  <motion.label
+                    className="flex items-start sm:items-center gap-3 sm:gap-4 cursor-pointer p-3 sm:p-4 bg-white/80 rounded-lg sm:rounded-xl border-2 border-gray-200 hover:border-red-300 hover:bg-red-50/50 transition-all duration-300 group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <input
+                      type="checkbox"
+                      name="dressCodeAccepted"
+                      checked={formData.dressCodeAccepted}
+                      onChange={handleInputChange}
+                      required
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 bg-transparent border-2 border-red-300 focus:ring-red-500 focus:ring-4 rounded mt-1 sm:mt-0 flex-shrink-0"
+                    />
+                    <div className="flex items-start sm:items-center gap-2 sm:gap-3">
+                      <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-red-500 group-hover:text-red-600 transition-colors duration-200 flex-shrink-0 mt-0.5 sm:mt-0" />
+                      <span className="text-sm sm:text-base font-poppins font-semibold text-gray-700 group-hover:text-red-800 transition-colors duration-200 leading-relaxed">
+                        Confirmo que he leído y acepto el código de vestimenta
+                      </span>
+                    </div>
+                  </motion.label>
+                  
+                  {errors.dressCodeAccepted && (
+                    <motion.div 
+                      className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-r from-red-50 to-amber-50 border-2 border-red-200 rounded-lg sm:rounded-xl shadow-lg"
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    >
+                      <div className="flex items-start sm:items-center gap-2 sm:gap-3">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center shadow-md flex-shrink-0 mt-0.5 sm:mt-0">
+                          <AlertTriangle className="w-3 h-3 sm:w-5 sm:h-5 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-red-700 font-poppins font-semibold text-sm sm:text-base">
+                            {errors.dressCodeAccepted}
+                          </p>
+                          <p className="text-red-600 font-poppins text-xs sm:text-sm mt-1">
+                            Por favor, marca la casilla para continuar
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
               </motion.div>
 
               {/* Submit Button */}
@@ -401,9 +483,11 @@ const RSVPForm = () => {
                       <span style={{ color: '#1f2937 !important' }}>Enviando confirmación...</span>
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center space-x-3 relative z-10" style={{ color: '#1f2937 !important' }}>
-                      <Send className="w-6 h-6" style={{ color: '#1f2937 !important' }} />
-                      <span style={{ color: '#1f2937 !important' }}>Enviar Confirmación</span>
+                    <div className="flex items-center justify-center space-x-4 relative z-10" style={{ color: '#1f2937 !important' }}>
+                      <div className="w-8 h-8 bg-gradient-to-br from-amber-600 to-amber-700 rounded-lg flex items-center justify-center shadow-lg">
+                        <Send className="w-5 h-5 text-white" />
+                      </div>
+                      <span style={{ color: '#1f2937 !important' }} className="text-xl font-bold">Enviar Confirmación</span>
                     </div>
                   )}
                 </motion.button>
