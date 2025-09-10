@@ -12,18 +12,18 @@ function doPost(e) {
     
     // Verificar si los encabezados ya existen
     const lastRow = sheet.getLastRow();
-    const firstRow = sheet.getRange(1, 1, 1, 5).getValues()[0];
+    const firstRow = sheet.getRange(1, 1, 1, 6).getValues()[0];
     const hasHeaders = firstRow.some(cell => cell && cell.toString().trim() !== '');
     
     // Solo crear encabezados si la hoja está completamente vacía
     if (lastRow === 0 || !hasHeaders) {
       // Crear encabezados en la primera fila
-      sheet.getRange(1, 1, 1, 5).setValues([
-        ['Nombre', 'Acompañantes', 'Telefono', 'Estado de confirmación de asistencia', 'Restricciones Alimentarias']
+      sheet.getRange(1, 1, 1, 6).setValues([
+        ['Nombre', 'Acompañantes', 'Nombres de Acompañantes', 'Telefono', 'Estado de confirmación de asistencia', 'Restricciones Alimentarias']
       ]);
       
       // Formatear encabezados
-      const headerRange = sheet.getRange(1, 1, 1, 5);
+      const headerRange = sheet.getRange(1, 1, 1, 6);
       headerRange.setFontWeight('bold');
       headerRange.setBackground('#f0f0f0');
     }
@@ -32,6 +32,7 @@ function doPost(e) {
     const rowData = [
       data.nombre || '',
       data.acompanantes || 0,
+      data.nombresAcompanantes || '',
       data.telefono || '',
       data.asistencia || '',
       data.restricciones || ''
@@ -39,7 +40,7 @@ function doPost(e) {
     
     // Insertar los datos en la siguiente fila disponible
     const newRow = lastRow + 1;
-    sheet.getRange(newRow, 1, 1, 5).setValues([rowData]);
+    sheet.getRange(newRow, 1, 1, 6).setValues([rowData]);
     
     // Devolver respuesta de éxito
     return ContentService
