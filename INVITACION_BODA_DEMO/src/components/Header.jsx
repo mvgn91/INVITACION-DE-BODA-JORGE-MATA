@@ -56,7 +56,7 @@ const Header = () => {
     <motion.header 
       className={`fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 md:px-8 py-4 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-burgundy-900/95 backdrop-blur-md border-b border-rose/20 shadow-lg' 
+          ? 'bg-slate-900/95 backdrop-blur-md border-b border-cyan-400/20 shadow-lg' 
           : 'bg-transparent'
       }`}
       initial={{ opacity: 0, y: -50 }}
@@ -69,10 +69,10 @@ const Header = () => {
           onClick={() => scrollToSection('hero')}
           className="flex items-center"
           whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3 }}
         >
           <span className="text-white font-fraunces font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-wider">
-            N & J
+            M & C
           </span>
         </motion.button>
 
@@ -82,7 +82,7 @@ const Header = () => {
             <motion.button
               key={item.name}
               onClick={() => scrollToSection(item.href.replace('#', ''))}
-              className="text-pearl-200 hover:text-rose-400 transition-colors duration-300 font-poppins font-medium"
+              className="text-blue-200 hover:text-cyan-300 transition-colors duration-300 font-poppins font-medium"
               whileHover={{ y: -2 }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       <motion.nav
-        className="md:hidden absolute top-full left-0 right-0 bg-burgundy-900/95 backdrop-blur-md border-t border-rose/20 overflow-hidden"
+        className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-cyan-400/20 overflow-hidden"
         initial={{ opacity: 0, height: 0 }}
         animate={{ 
           opacity: isMenuOpen ? 1 : 0, 
@@ -118,7 +118,7 @@ const Header = () => {
             <motion.button
               key={item.name}
               onClick={() => scrollToSection(item.href.replace('#', ''))}
-              className="block text-pearl-200 hover:text-rose-400 transition-colors duration-300 font-poppins font-medium py-2 w-full text-left"
+              className="block text-blue-200 hover:text-cyan-300 transition-colors duration-300 font-poppins font-medium py-2 w-full text-left"
               initial={{ opacity: 0, x: -20 }}
               animate={{ 
                 opacity: isMenuOpen ? 1 : 0, 

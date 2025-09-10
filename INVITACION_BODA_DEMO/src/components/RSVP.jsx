@@ -23,12 +23,12 @@ const RSVP = () => {
           transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-burgundy-800 mb-6 sm:mb-8 tracking-tight relative inline-block drop-shadow-[0_0_8px_rgba(139,69,19,0.15)]">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-fraunces font-bold text-burgundy-800 mb-6 sm:mb-8 tracking-tight relative inline-block">
             <span className="relative z-10 bg-gradient-to-r from-burgundy-800 via-rose-600 to-burgundy-800 bg-clip-text text-transparent">Confirma tu Asistencia</span>
             <div className="absolute -inset-1 bg-gradient-to-r from-rose/15 via-burgundy-300/15 to-rose/15 blur-sm opacity-40 rounded-lg"></div>
           </h2>
           <p className="text-base sm:text-lg md:text-xl font-poppins text-burgundy-600 max-w-2xl mx-auto leading-relaxed">
-            Por favor, confirma tu asistencia antes del 10 de octubre. 
+            Por favor, confirma tu asistencia antes del 1 de agosto. 
             Tu presencia es muy importante para nosotros.
           </p>
         </motion.div>

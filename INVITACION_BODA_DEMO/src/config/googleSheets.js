@@ -9,9 +9,9 @@ export const sendToGoogleSheets = async (formData) => {
     const dataToSend = {
       nombre: formData.nombre.trim(),
       acompanantes: parseInt(formData.acompanantes) || 0,
-      nombresAcompanantes: formData.nombresAcompanantes.filter(nombre => nombre.trim()).join(', '),
       telefono: formData.telefono.trim(),
-      asistencia: formData.asistencia
+      asistencia: formData.asistencia,
+      restricciones: formData.restricciones.trim()
     };
 
     console.log('🚀 Enviando datos a Google Sheets:', dataToSend);

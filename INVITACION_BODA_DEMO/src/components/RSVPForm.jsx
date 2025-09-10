@@ -7,9 +7,9 @@ const RSVPForm = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     acompanantes: 0,
-    nombresAcompanantes: [],
     telefono: '',
     asistencia: '',
+    restricciones: '',
     dressCodeAccepted: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,31 +19,10 @@ const RSVPForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
-    if (name === 'acompanantes') {
-      const numAcompanantes = parseInt(value) || 0;
-      setFormData(prev => {
-        const newNombres = Array(numAcompanantes).fill('');
-        return {
-          ...prev,
-          acompanantes: numAcompanantes,
-          nombresAcompanantes: newNombres
-        };
-      });
-    } else if (name.startsWith('acompanante_')) {
-      const index = parseInt(name.split('_')[1]);
-      setFormData(prev => ({
-        ...prev,
-        nombresAcompanantes: prev.nombresAcompanantes.map((nombre, i) => 
-          i === index ? value : nombre
-        )
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value
-      }));
-    }
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
     
     // Clear error when user starts typing
     if (errors[name]) {
@@ -81,7 +60,6 @@ const RSVPForm = () => {
       newErrors.telefono = 'El teléfono debe tener al menos 10 dígitos';
     }
     
-    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -95,16 +73,9 @@ const RSVPForm = () => {
     
     setIsSubmitting(true);
 
-    try {
-      // Enviar datos a Google Sheets
-      const result = await sendToGoogleSheets(formData);
-      
-      if (result.success) {
-        console.log('✅ Datos enviados exitosamente a Google Sheets');
-      } else {
-        console.error('❌ Error enviando datos:', result.error);
-      }
-      
+    // DEMO: Simular envío sin enviar datos reales
+    setTimeout(() => {
+      console.log('🎯 DEMO: Formulario RSVP simulado - No se enviaron datos reales');
       setIsSubmitted(true);
       setShowConfetti(true);
       
@@ -115,20 +86,14 @@ const RSVPForm = () => {
       setFormData({
         nombre: '',
         acompanantes: 0,
-        nombresAcompanantes: [],
         telefono: '',
         asistencia: '',
+        restricciones: '',
         dressCodeAccepted: false
       });
-    } catch (error) {
-      console.error('Error sending RSVP:', error);
-      // En caso de error, aún mostramos el mensaje de éxito para simular
-      setIsSubmitted(true);
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 4000);
-    } finally {
+      
       setIsSubmitting(false);
-    }
+    }, 2000); // Simular delay de 2 segundos
   };
 
   const containerVariants = {
@@ -215,7 +180,7 @@ const RSVPForm = () => {
         viewport={{ once: true }}
       >
         {/* Efecto de brillo sutil */}
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-50/30 to-rose-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-50/30 to-secondary-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         
         <div className="relative z-10">
           {isSubmitted ? (
@@ -226,7 +191,7 @@ const RSVPForm = () => {
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <motion.div 
-                className="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 flex items-center justify-center shadow-2xl"
+                className="w-20 h-20 mx-auto mb-8 rounded-full bg-gradient-to-br from-accent-400 to-secondary-500 flex items-center justify-center shadow-2xl"
                 animate={{
                   scale: [1, 1.1, 1],
                   rotate: [0, 5, -5, 0],
@@ -240,14 +205,14 @@ const RSVPForm = () => {
                 <Check className="w-10 h-10 text-white" />
               </motion.div>
               <h3 className="text-2xl sm:text-3xl font-fraunces font-bold text-gray-800 mb-4">
-                🎉 ¡Gracias por confirmar tu asistencia!
+                🎉 ¡Gracias por probar la demo!
               </h3>
               <p className="text-lg font-poppins text-gray-600 mb-8">
-                Tu respuesta ha sido enviada exitosamente
+                Esta es una versión DEMO - No se enviaron datos reales
               </p>
-              <div className="inline-block px-8 py-4 bg-gradient-to-r from-amber-50 to-rose-50 rounded-2xl border border-amber-200">
+              <div className="inline-block px-8 py-4 bg-gradient-to-r from-accent-50 to-secondary-50 rounded-2xl border border-accent-200">
                 <p className="text-lg font-poppins text-gray-700 italic">
-                  ¡Nos vemos el 15 de noviembre!
+                  ¡Nos vemos el 20 de agosto!
                 </p>
               </div>
             </motion.div>
@@ -256,7 +221,7 @@ const RSVPForm = () => {
               {/* Nombre Completo */}
               <motion.div variants={itemVariants}>
                 <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center shadow-lg">
                     <User className="w-6 h-6 text-white" />
                   </div>
                   Nombre Completo *
@@ -267,8 +232,8 @@ const RSVPForm = () => {
                   value={formData.nombre}
                   onChange={handleInputChange}
                   required
-                  className={`w-full px-6 py-4 bg-white border-2 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-amber-200/50 transition-all duration-300 text-lg font-poppins font-medium ${
-                    errors.nombre ? 'border-red-400 focus:border-red-500' : 'border-gray-200 focus:border-amber-400'
+                  className={`w-full px-6 py-4 bg-white border-2 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-accent-200/50 transition-all duration-300 text-lg font-poppins font-medium ${
+                    errors.nombre ? 'border-red-400 focus:border-red-500' : 'border-gray-200 focus:border-accent-400'
                   }`}
                   placeholder="Tu nombre completo"
                   whileFocus={{
@@ -301,7 +266,7 @@ const RSVPForm = () => {
                   value={formData.acompanantes}
                   onChange={handleInputChange}
                   min="0"
-                  className="w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-400 transition-all duration-300 text-lg font-poppins font-medium"
+                  className="w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-accent-200/50 focus:border-accent-400 transition-all duration-300 text-lg font-poppins font-medium"
                   placeholder="0"
                   whileFocus={{
                     scale: 1.02,
@@ -309,39 +274,6 @@ const RSVPForm = () => {
                   }}
                 />
               </motion.div>
-
-              {/* Nombres de Acompañantes */}
-              {formData.acompanantes > 0 && (
-                <motion.div 
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    Nombres de Acompañantes
-                  </label>
-                  <div className="space-y-4">
-                    {formData.nombresAcompanantes.map((nombre, index) => (
-                      <div key={index}>
-                        <label className="block text-sm font-poppins font-medium text-gray-600 mb-2">
-                          Acompañante {index + 1}
-                        </label>
-                        <input
-                          type="text"
-                          name={`acompanante_${index}`}
-                          value={nombre || ''}
-                          onChange={handleInputChange}
-                          className="w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-amber-200/50 focus:border-amber-400 transition-all duration-300 text-lg font-poppins font-medium"
-                          placeholder={`Nombre completo del acompañante ${index + 1}`}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
 
               {/* Teléfono */}
               <motion.div variants={itemVariants}>
@@ -357,8 +289,8 @@ const RSVPForm = () => {
                   value={formData.telefono}
                   onChange={handleInputChange}
                   required
-                  className={`w-full px-6 py-4 bg-white border-2 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-amber-200/50 transition-all duration-300 text-lg font-poppins font-medium ${
-                    errors.telefono ? 'border-red-400 focus:border-red-500' : 'border-gray-200 focus:border-amber-400'
+                  className={`w-full px-6 py-4 bg-white border-2 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-accent-200/50 transition-all duration-300 text-lg font-poppins font-medium ${
+                    errors.telefono ? 'border-red-400 focus:border-red-500' : 'border-gray-200 focus:border-accent-400'
                   }`}
                   placeholder="Tu número de teléfono"
                   whileFocus={{
@@ -392,10 +324,10 @@ const RSVPForm = () => {
                   ].map((option) => (
                     <motion.label
                       key={option.value}
-                      className={`flex items-center space-x-3 sm:space-x-4 cursor-pointer p-4 sm:p-6 rounded-2xl border-2 transition-all duration-300 group ${
+                        className={`flex items-center space-x-3 sm:space-x-4 cursor-pointer p-4 sm:p-6 rounded-2xl border-2 transition-all duration-300 group ${
                         formData.asistencia === option.value
-                          ? 'bg-gradient-to-r from-amber-50 to-rose-50 border-amber-400 shadow-lg'
-                          : 'bg-white border-gray-200 hover:border-amber-300 hover:bg-amber-50/30'
+                          ? 'bg-gradient-to-r from-accent-50 to-secondary-50 border-accent-400 shadow-lg'
+                          : 'bg-white border-gray-200 hover:border-accent-300 hover:bg-accent-50/30'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -407,11 +339,11 @@ const RSVPForm = () => {
                         checked={formData.asistencia === option.value}
                         onChange={handleInputChange}
                         required
-                        className="w-6 h-6 text-amber-600 bg-transparent border-2 border-amber-300 focus:ring-amber-500 focus:ring-4"
+                        className="w-6 h-6 text-accent-600 bg-transparent border-2 border-accent-300 focus:ring-accent-500 focus:ring-4"
                       />
-                      <option.icon className={`w-6 h-6 ${formData.asistencia === option.value ? 'text-amber-600' : 'text-gray-400'}`} />
-                      <span className={`text-base sm:text-lg font-poppins font-medium group-hover:text-amber-700 transition-colors duration-200 ${
-                        formData.asistencia === option.value ? 'text-amber-800' : 'text-gray-700'
+                      <option.icon className={`w-6 h-6 ${formData.asistencia === option.value ? 'text-accent-600' : 'text-gray-400'}`} />
+                      <span className={`text-base sm:text-lg font-poppins font-medium group-hover:text-accent-700 transition-colors duration-200 ${
+                        formData.asistencia === option.value ? 'text-accent-800' : 'text-gray-700'
                       }`}>
                         {option.label}
                       </span>
@@ -429,12 +361,33 @@ const RSVPForm = () => {
                 )}
               </motion.div>
 
+              {/* Restricciones Alimentarias */}
+              <motion.div variants={itemVariants}>
+                <label className="flex items-center gap-4 text-lg sm:text-xl font-fraunces font-bold text-gray-800 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <Utensils className="w-6 h-6 text-white" />
+                  </div>
+                  Restricciones Alimentarias (opcional)
+                </label>
+                <motion.textarea
+                  name="restricciones"
+                  value={formData.restricciones}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-6 py-4 bg-white border-2 border-gray-200 rounded-2xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-accent-200/50 focus:border-accent-400 transition-all duration-300 resize-none text-lg font-poppins font-medium"
+                  placeholder="Ejemplo: Vegetariano, Sin gluten, Alérgico a mariscos…"
+                  whileFocus={{
+                    scale: 1.02,
+                    boxShadow: "0 0 30px rgba(245, 158, 11, 0.2)",
+                  }}
+                />
+              </motion.div>
 
               {/* Código de Vestimenta */}
               <motion.div variants={itemVariants}>
-                <div className="bg-gradient-to-r from-red-50 to-amber-50 border-2 border-red-200 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <div className="bg-gradient-to-r from-primary-50 to-accent-50 border-2 border-primary-200 rounded-xl sm:rounded-2xl p-4 sm:p-6">
                   <label className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 text-base sm:text-lg font-fraunces font-bold text-gray-800 mb-3 sm:mb-4">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
                       <Shirt className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                     </div>
                     <div className="flex-1 text-center sm:text-left">
@@ -473,7 +426,7 @@ const RSVPForm = () => {
                   
                   {errors.dressCodeAccepted && (
                     <motion.div 
-                      className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-r from-red-50 to-amber-50 border-2 border-red-200 rounded-lg sm:rounded-xl shadow-lg"
+                      className="mt-3 sm:mt-4 p-3 sm:p-4 bg-gradient-to-r from-primary-50 to-accent-50 border-2 border-primary-200 rounded-lg sm:rounded-xl shadow-lg"
                       initial={{ opacity: 0, y: -10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -501,7 +454,7 @@ const RSVPForm = () => {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-6 bg-amber-100 hover:bg-amber-200 text-gray-800 font-poppins font-bold text-xl rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/25 relative overflow-hidden group"
+                  className="w-full py-6 bg-accent-100 hover:bg-accent-200 text-gray-800 font-poppins font-bold text-xl rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-2xl hover:shadow-accent-500/25 relative overflow-hidden group"
                   whileHover={{
                     scale: isSubmitting ? 1 : 1.05,
                     boxShadow: "0 0 40px rgba(245, 158, 11, 0.4)",
@@ -514,14 +467,14 @@ const RSVPForm = () => {
                   {isSubmitting ? (
                     <div className="flex items-center justify-center space-x-3" style={{ color: '#1f2937 !important' }}>
                       <div className="w-6 h-6 border-2 border-gray-800 border-t-transparent rounded-full animate-spin"></div>
-                      <span style={{ color: '#1f2937 !important' }}>Enviando confirmación...</span>
+                      <span style={{ color: '#1f2937 !important' }}>Procesando demo...</span>
                     </div>
                   ) : (
                     <div className="flex items-center justify-center space-x-4 relative z-10" style={{ color: '#1f2937 !important' }}>
-                      <div className="w-8 h-8 bg-gradient-to-br from-amber-600 to-amber-700 rounded-lg flex items-center justify-center shadow-lg">
+                      <div className="w-8 h-8 bg-gradient-to-br from-accent-600 to-accent-700 rounded-lg flex items-center justify-center shadow-lg">
                         <Send className="w-5 h-5 text-white" />
                       </div>
-                      <span style={{ color: '#1f2937 !important' }} className="text-xl font-bold">Enviar Confirmación</span>
+                      <span style={{ color: '#1f2937 !important' }} className="text-xl font-bold">Probar Demo</span>
                     </div>
                   )}
                 </motion.button>

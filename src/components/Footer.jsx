@@ -17,7 +17,7 @@ const Footer = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <span className="text-burgundy-800 font-fraunces font-bold text-lg sm:text-xl md:text-2xl tracking-wider">J & N</span>
+            <span className="text-burgundy-800 font-fraunces font-bold text-lg sm:text-xl md:text-2xl tracking-wider">N & J</span>
           </motion.div>
 
           {/* Hashtag y Creditos */}
