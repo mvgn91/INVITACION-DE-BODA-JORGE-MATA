@@ -36,74 +36,101 @@ const GiftRegistry = () => {
           </p>
         </motion.div>
 
-        {/* Tarjeta principal elegante */}
+        {/* Tarjeta Liverpool */}
         <motion.div
-          className="mb-16"
+          className="mb-8"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="relative bg-burgundy-800/95 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 border border-rose/30 shadow-2xl hover:shadow-3xl transition-all duration-700 group">
+          <div className="relative bg-burgundy-800/95 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-rose/30 shadow-2xl hover:shadow-3xl transition-all duration-700 group">
             <div className="absolute inset-0 bg-gradient-to-br from-rose/5 to-burgundy-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl"></div>
             
             <div className="relative z-10 text-center">
-              {/* Icono principal con animación */}
+              {/* Icono principal */}
               <motion.div
-                className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gradient-to-br from-rose-500 to-burgundy-500 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                animate={{
-                  boxShadow: [
-                    "0 20px 25px -5px rgba(244, 63, 94, 0.1), 0 10px 10px -5px rgba(244, 63, 94, 0.04)",
-                    "0 25px 50px -12px rgba(244, 63, 94, 0.25), 0 15px 15px -5px rgba(244, 63, 94, 0.1)",
-                    "0 20px 25px -5px rgba(244, 63, 94, 0.1), 0 10px 10px -5px rgba(244, 63, 94, 0.04)"
-                  ]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-rose-500 to-burgundy-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl"
+                whileHover={{ scale: 1.05, rotate: 2 }}
               >
-                <Gift className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 text-white" />
+                <Gift className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
               </motion.div>
 
               {/* Información principal */}
-              <div className="mb-10">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-fraunces font-bold text-pearl-100 mb-4">
+              <div className="mb-6">
+                <h3 className="text-xl font-fraunces font-bold text-pearl-100 mb-2">
                   Liverpool
                 </h3>
-                <p className="text-lg sm:text-xl md:text-2xl text-pearl-200 font-poppins font-medium mb-6">
+                <p className="text-base text-pearl-200 font-poppins mb-4">
                   Si deseas obsequiarnos algo especial
-                </p>
-                <p className="text-base sm:text-lg text-pearl-300 font-poppins leading-relaxed max-w-2xl mx-auto">
-                  Tu atención y cariño son el mejor regalo que podemos recibir.
                 </p>
               </div>
 
-              {/* Call to Action principal */}
+              {/* Botón */}
               <motion.a
                 href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51755425"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center px-10 sm:px-12 md:px-16 py-5 sm:py-6 md:py-8 bg-rose-600 hover:bg-rose-700 font-poppins font-bold text-lg sm:text-xl md:text-2xl rounded-2xl sm:rounded-3xl transition-all duration-300 shadow-2xl hover:shadow-3xl group hover:scale-105 active:scale-95 border-2 border-rose-500 text-white"
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
+                className="relative z-20 inline-flex items-center px-6 sm:px-8 py-3 bg-rose-600 hover:bg-rose-700 font-poppins font-medium text-base sm:text-lg rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl group hover:scale-105 active:scale-95 border-2 border-rose-500 text-white"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
               >
-                <Gift className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 mr-3 sm:mr-4 group-hover:rotate-12 transition-transform duration-300 text-white" />
-                <span className="text-white">Ver Mesa de Regalos</span>
-                <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ml-3 sm:ml-4 group-hover:translate-x-1 transition-transform duration-300 text-white" />
+                <Gift className="w-5 h-5 sm:w-6 sm:h-6 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                <span>Ver en Liverpool</span>
+                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-300" />
               </motion.a>
             </div>
           </div>
         </motion.div>
 
-        {/* Mensaje de agradecimiento con fondo blanco distintivo */}
+        {/* Amazon Registry */}
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <div className="relative bg-amber-800/95 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-amber-500/30 shadow-2xl hover:shadow-3xl transition-all duration-700 group">
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl"></div>
+            
+            <div className="relative z-10 text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-xl">
+                  <Gift className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-fraunces font-bold text-amber-100 mb-2">
+                  Amazon
+                </h3>
+                <p className="text-base text-amber-200 font-poppins">
+                  También puedes encontrarnos en Amazon
+                </p>
+              </div>
+
+              <motion.a
+                href="https://www.amazon.com.mx/wedding/registry/2UDT5HVBCPR12"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-20 inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-amber-600 hover:bg-amber-700 font-poppins font-medium text-base sm:text-lg rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl group-hover:scale-105 active:scale-95 border-2 border-amber-500 text-white"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Gift className="w-5 h-5 sm:w-6 sm:h-6 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                <span>Ver en Amazon</span>
+                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-300" />
+              </motion.a>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Mensaje de agradecimiento al final */}
+        <motion.div
+          className="text-center mt-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
           viewport={{ once: true }}
         >
           <motion.div 
@@ -114,12 +141,9 @@ const GiftRegistry = () => {
               transition: { duration: 0.4, ease: "easeOut" }
             }}
           >
-            {/* Borde fijo */}
             <div className="absolute inset-0 rounded-2xl border-2 border-burgundy-300/40"></div>
             
-            {/* Contenido principal */}
             <div className="relative z-10">
-              {/* Icono único con animación */}
               <motion.div
                 className="flex items-center justify-center mb-4"
                 animate={{
@@ -133,16 +157,14 @@ const GiftRegistry = () => {
                 }}
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-burgundy-600 to-burgundy-800 rounded-full flex items-center justify-center shadow-lg">
-                  <Sparkles className="w-6 h-6 text-white" />
+                  <Heart className="w-6 h-6 text-white" />
                 </div>
               </motion.div>
               
-              {/* Texto fijo */}
               <p className="text-lg font-poppins font-medium text-burgundy-800">
                 Gracias por ser parte de nuestra historia
               </p>
             </div>
-            
           </motion.div>
         </motion.div>
       </div>

@@ -19,7 +19,7 @@ const CeremonyDetails = () => {
     {
       icon: Heart,
       title: "Fecha",
-      value: "15 de Noviembre, 2025",
+      value: "15 de Noviembre, 2025 - 7PM",
       subtitle: "Sábado",
       color: "from-rose-500 to-burgundy-600"
     },
