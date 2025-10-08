@@ -9,13 +9,14 @@ import {
 
 const Reception = () => {
   const eventDate = new Date('2025-11-15');
+  const receptionLocation = "Salon de eventos STAUdeG, Blvd. del Rodeo 456, Rinconada de La Azalea, 45150 Zapopan, Jal";
   
   const generateGoogleCalendarLink = () => {
     const startDate = eventDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     const endDate = new Date(eventDate.getTime() + 4 * 60 * 60 * 1000).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     
-    const details = encodeURIComponent('Boda de Noemí Sarahi Hernández Arevalos y Jorge Isaac Mata Guerrero\n\nDetalles de la recepción se confirmarán próximamente.\n\n¡Esperamos verte ahí!');
-    const location = encodeURIComponent('Ubicación por confirmar');
+    const details = encodeURIComponent(`Boda de Noemí Sarahi Hernández Arevalos y Jorge Isaac Mata Guerrero\n\nRecepción en: ${receptionLocation}\n\n¡Esperamos verte ahí!`);
+    const location = encodeURIComponent(receptionLocation);
     
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda de Noemí y Jorge&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
   };
@@ -33,8 +34,8 @@ DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
 DTSTART:${startDate}
 DTEND:${endDate}
 SUMMARY:Boda de Noemí y Jorge
-DESCRIPTION:Boda de Noemí Sarahi Hernández Arevalos y Jorge Isaac Mata Guerrero\\n\\nDetalles de la recepción se confirmarán próximamente.\\n\\n¡Esperamos verte ahí!
-LOCATION:Ubicación por confirmar
+DESCRIPTION:Boda de Noemí Sarahi Hernández Arevalos y Jorge Isaac Mata Guerrero\\n\\nRecepción en: ${receptionLocation}\\n\\n¡Esperamos verte ahí!
+LOCATION:${receptionLocation}
 STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR`;
@@ -86,16 +87,11 @@ END:VCALENDAR`;
               <div className="w-24 h-px bg-gradient-to-l from-transparent via-rose-300 to-transparent"></div>
             </div>
             <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-fraunces font-bold text-burgundy-800 mb-4">
-              Eventos GREENOVIA
+              Salon de eventos STAUdeG
             </h3>
             <p className="text-lg md:text-xl font-poppins text-burgundy-600 max-w-3xl mx-auto leading-relaxed">
-              Volcán Kenia 5471A, Panorámica de Huentitán, 44259 Guadalajara, Jal
+              Blvd. del Rodeo 456, Rinconada de La Azalea, 45150 Zapopan, Jal.
             </p>
-            <div className="mt-4 inline-block px-6 py-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-2xl border border-amber-200/50">
-              <p className="text-base font-poppins font-semibold text-amber-800">
-                *Sujeta a cambios
-              </p>
-            </div>
           </div>
           
           <div className="relative bg-white/95 backdrop-blur-lg rounded-3xl p-8 border border-rose/30 shadow-2xl hover:shadow-3xl transition-all duration-700">
@@ -109,18 +105,17 @@ END:VCALENDAR`;
                       <MapPin className="w-6 h-6 text-rose-500 mr-3" />
                       Dirección
                     </h4>
-                    <p className="text-lg font-poppins font-semibold text-burgundy-700 mb-2">Eventos GREENOVIA</p>
-                    <p className="text-base font-poppins text-burgundy-600">Volcán Kenia 5471A, Panorámica de Huentitán</p>
-                    <p className="text-sm font-poppins text-burgundy-500">44259 Guadalajara, Jal</p>
+                    <p className="text-lg font-poppins font-semibold text-burgundy-700 mb-2">Salon de eventos STAUdeG</p>
+                    <p className="text-base font-poppins text-burgundy-600">Blvd. del Rodeo 456, Rinconada de La Azalea</p>
+                    <p className="text-sm font-poppins text-burgundy-500">45150 Zapopan, Jal</p>
                   </div>
                   
                   <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl p-6 border border-amber/30">
                     <h4 className="text-xl font-fraunces font-bold text-burgundy-800 mb-4 flex items-center">
                       <Heart className="w-6 h-6 text-amber-500 mr-3" />
-                      Información Adicional
+                      ¡Los esperamos!
                     </h4>
-                    <p className="text-base font-poppins text-burgundy-700 mb-2">Detalles por confirmar</p>
-                    <p className="text-sm font-poppins text-amber-700 font-semibold">*Sujeta a cambios</p>
+                    <p className="text-base font-poppins text-burgundy-700 mb-2">Su presencia es nuestro mejor regalo.</p>
                   </div>
 
                   <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl p-6 border border-amber/30">
@@ -130,7 +125,7 @@ END:VCALENDAR`;
                     </h4>
                     <div className="space-y-3">
                       <a
-                        href="https://maps.app.goo.gl/NW7YH3GWM7rF6rwt5"
+                        href="https://maps.app.goo.gl/qqmRmxHErWvfBPbn7"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full bg-blue-500 hover:bg-blue-600 text-white font-poppins font-semibold py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center group hover:shadow-lg hover:scale-105 active:scale-95"
@@ -139,7 +134,7 @@ END:VCALENDAR`;
                         <span className="hidden xs:inline">Abrir en </span>Google Maps
                       </a>
                       <a
-                        href="https://www.waze.com/en/live-map/directions/mx/jal./guadalajara/eventos-greenovia?place=ChIJh4MHjJCxKIQR9p57R1shNEA"
+                        href="https://ul.waze.com/ul?place=ChIJvW0Fe5mvKIQRKXPWrAxM73A&ll=20.73297900%2C-103.38391080&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full bg-purple-500 hover:bg-purple-600 text-white font-poppins font-semibold py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl transition-all duration-300 flex items-center justify-center group hover:shadow-lg hover:scale-105 active:scale-95"
@@ -154,7 +149,7 @@ END:VCALENDAR`;
                 <div className="lg:col-span-2 hidden sm:block">
                   <div className="relative overflow-hidden rounded-2xl shadow-xl">
                     <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.394990469191!2d-103.3119085!3d20.7347786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b1908c078387%3A0x4034215b477b9ef6!2sEventos%20GREENOVIA!5e0!3m2!1ses-419!2smx!4v1757285542922!5m2!1ses-419!2smx" 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.4393558250713!2d-103.3839108!3d20.732979000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af997b056dbd%3A0x70ef4c0cacd67329!2sSal%C3%B3n%20de%20eventos%20STAUdeG!5e0!3m2!1ses-419!2smx!4v1759891177760!5m2!1ses-419!2smx" 
                       width="100%" 
                       height="300" 
                       style={{border: 0}} 
